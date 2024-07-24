@@ -4,16 +4,19 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { Button } from "@/components/ui/button"
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form"
+import {  Form } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
+import CustomFormField from "../customformfield"
+
+export enum FormFieldType  {
+  INPUT = "input",
+  SELECT = "select",
+  TEXTAREA = "textarea",
+  CHECKBOX = "checkbox",
+  DATEPICKER = "datepicker",
+  PHONE_INPUT = "phoneInput",
+  SKELETON = "skeleton",
+}
  
 const formSchema = z.object({
   username: z.string().min(5, {
@@ -43,21 +46,14 @@ const PatientForm = () => {
           <h1 className="header">Welcome to Matt Care😜</h1>
           <p className="text-dark-700">Schedule your first Appointment!</p>
         </section>
-        <FormField
-          control={form.control}
-          name="username"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Username</FormLabel>
-              <FormControl>
-                <Input placeholder="shadcn" {...field} />
-              </FormControl>
-              <FormDescription>
-                This is your public display name.
-              </FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
+        <CustomFormField 
+        fieldType = {FormFieldType.INPUT}
+        control = {form.control} 
+        name = "name"
+        label = "Full Name"
+        placeholder = "Enter your username"
+        iconSrc = "assets/icons/user.svg"
+        iconAlt = "user"
         />
         <Button type="submit">Submit</Button>
       </form>
