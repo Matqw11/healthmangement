@@ -9,7 +9,7 @@ export default function Home() {
       <div className="sub-container max-w-width-[496px]">
         <Image 
           src="/assets/images/file3.png"
-          height={5000}
+          height={1000}
           width={1000}
           alt="MattCareLogo"
           className="mb-12 h-12 w-fit"
