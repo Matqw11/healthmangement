@@ -1,4 +1,4 @@
-import PatientForm from "@/components/forms/patient";
+import PatientForm from "@/components/forms/patientForm";
 import Image from "next/image";
 import Link from "next/link";
 export default function Home() {
