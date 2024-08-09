@@ -19,6 +19,9 @@ import 'react-phone-number-input/style.css'
 import PhoneInput from 'react-phone-number-input'
 import { E164Number } from "libphonenumber-js/core"
 import ReactDatePicker from "react-datepicker";
+import { Select, SelectContent, SelectTrigger, SelectValue } from "./ui/select";
+import { Textarea } from "./ui/textarea"
+import { Checkbox } from "./ui/checkbox"
 interface CustomProps {
   control: Control<any>,
   fieldType: FormFieldType,
@@ -82,6 +85,33 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
           </FormControl>
         </div>
       )
+
+      case FormFieldType.TEXTAREA:
+        return (
+          <FormControl>
+            <Textarea
+              placeholder={props.placeholder}
+              {...field}
+              className="shad-textArea"
+              disabled={props.disabled}
+            />
+          </FormControl>
+        );
+
+    case FormFieldType.CHECKBOX:
+      return (
+          <FormControl>
+            <div className="flex items-center gap-4" >
+            <Checkbox
+              id={props.name}
+              checked={field.value}
+              onCheckedChange={field.onChange}
+            />
+            <label htmlFor={props.name} className="checkbox-label">{props.label}</label>
+            </div>
+          </FormControl>
+        
+      )
     case FormFieldType.PHONE_INPUT:
       return (
         <div className="flex rounded-md border border-dark-500 bg-dark-400">
@@ -103,6 +133,23 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
     case FormFieldType.SKELETON:
       return renderSkeleton ? renderSkeleton(field)
         : null;
+
+    case FormFieldType.SELECT:
+      return (
+        <FormControl>
+          <Select onValueChange={field.onChange} defaultValue={field.value}>
+            <FormControl>
+              <SelectTrigger className="shad-select-trigger">
+                <SelectValue placeholder={props.placeholder} />
+              </SelectTrigger>
+            </FormControl>
+            <SelectContent className="shad-select-content">
+              {props.children}
+            </SelectContent>
+          </Select>
+        </FormControl>
+
+      );
     default:
       break;
   }
