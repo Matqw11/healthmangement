@@ -84,8 +84,10 @@ const RegisterForm = ({ user }: { user: User }) => {
           ? formData
           : undefined,
         privacyConsent: values.privacyConsent,
+        treatmentConsent: values.treatmentConsent,
+        disclosureConsent: values.disclosureConsent,
       }
-      //@ts-ignore
+   
       const newPatient = await registerPatient(patient)
       if (newPatient) {
         router.push(`/patients/${user.$id}/new-appointment`)
